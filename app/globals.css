@@ -24,3 +24,58 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ✅ Apply Akira font to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-akira), cursive;
+}
+
+/* Optional class (still usable) */
+.akira-regular {
+  font-family: var(--font-akira), cursive;
+}
+.futuraFont {
+   font-family: var(--font-futura), cursive;
+}
+
+p {
+  font-family: var(--font-futura), cursive;
+  font-size: 22px;
+  line-height: 2rem;
+  font-weight: 500; 
+
+}
+.color {
+  color: #ff4200;
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}

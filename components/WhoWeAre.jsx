@@ -1,0 +1,75 @@
+import Image from "next/image";
+
+export default function WhoWeAre() {
+  return (
+    <div className="max-w-[1600px] mx-auto rounded-xl">
+
+      {/* TOP SECTION */}
+      <div
+        className="w-full relative px-6 sm:px-10 md:px-16 pt-10 md:pt-16 pb-6 bg-[#e9e1d8] bg-cover bg-center overflow-visible rounded-t-xl"
+        style={{ backgroundImage: "url('/boneimage.png')" }}
+      >
+        <div className="max-w-[1200px] mx-auto">
+          <h3 className="text-[#ff4d00] text-[20px] sm:text-[28px] md:text-[39px] uppercase font-semibold">
+            Who We Are
+          </h3>
+
+          <h1 className="text-[#ff4d00] text-[60px] sm:text-[90px] md:text-[140px] font-extrabold leading-none">
+            EMORO
+          </h1>
+        </div>
+
+        {/* Floating Image — hidden on mobile to avoid layout issues */}
+        <img
+          src="/boneimage2.png"
+          alt="icon"
+          className="hidden md:block absolute right-150 top-10 w-[100px] animate-float"
+        />
+      </div>
+
+      {/* BOTTOM SECTION */}
+      <div className="w-full bg-[#ff5a1f] px-6 sm:px-10 md:px-16 py-8 md:py-6 relative overflow-visible rounded-b-xl">
+        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-start gap-6 md:gap-0">
+
+          {/* LEFT TEXT */}
+          <div className="w-full md:w-1/2 text-white">
+            <p className="text-[14px] sm:text-[15px] leading-relaxed mb-6">
+              We are a team of passionate pet lovers dedicated to creating dog food that combines real, high-quality ingredients with scientifically balanced nutrition. Every formula is crafted with care to support your dog's health, happiness, and vitality — because we believe every dog deserves a life full of energy, love, and joy.
+            </p>
+
+            <p className="text-[14px] sm:text-[15px] leading-relaxed">
+              At the heart of our brand lies a commitment to uncompromised quality, transparency, and care. We source only the finest ingredients.
+            </p>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          {/* Desktop: overlapping absolute layout (original) */}
+          <div className="hidden md:block w-1/2 relative">
+            <div className="absolute -right-25 -top-76">
+              <Image
+                src="/image6.png"
+                alt="Dog"
+                width={500}
+                height={650}
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Mobile: normal flow image */}
+          <div className="block md:hidden w-full flex justify-center">
+            <Image
+              src="/image6.png"
+              alt="Dog"
+              width={300}
+              height={380}
+              className="object-contain mx-auto"
+            />
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  );
+}
