@@ -156,10 +156,10 @@ export default function Footer() {
           <h4 className="font-bold uppercase mb-3 text-gray-800">Social Media</h4>
           <ul className="space-y-3 text-gray-700">
             <li className="flex items-center gap-2">
-              📧 info@emoro.com
+              📧 sales@loveemoro.com
             </li>
             <li className="flex items-center gap-2">
-              📞 9900-9900-99
+              📞 +1 786-789-2121
             </li>
           </ul>
         </div>

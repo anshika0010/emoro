@@ -44,27 +44,23 @@ export default function WhoWeAre() {
 
           {/* RIGHT IMAGE */}
           {/* Desktop: overlapping absolute layout (original) */}
-          <div className="hidden md:block w-1/2 relative">
-            <div className="absolute -right-25 -top-76">
-              <Image
-                src="/image6.png"
-                alt="Dog"
-                width={500}
-                height={650}
-                className="object-contain"
-              />
-            </div>
-          </div>
+        <Image
+  src="/image6.png"
+  alt="Dog"
+  width={500}
+  height={650}
+  className="object-contain w-auto h-auto"
+/>
 
           {/* Mobile: normal flow image */}
           <div className="block md:hidden w-full flex justify-center">
-            <Image
-              src="/image6.png"
-              alt="Dog"
-              width={300}
-              height={380}
-              className="object-contain mx-auto"
-            />
+          <Image
+  src="/image6.png"
+  alt="Dog"
+  width={300}
+  height={380}
+  className="object-contain mx-auto w-auto h-auto"
+/>
           </div>
 
         </div>

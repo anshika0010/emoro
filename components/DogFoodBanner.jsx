@@ -22,7 +22,7 @@ export default function DogFoodBanner() {
             src="/image3.png"
             alt="Dog"
             width={260}
-            height={320}
+            height={220}
             className="object-contain"
           />
         </div>

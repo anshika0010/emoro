@@ -69,17 +69,18 @@ export default function FAQSection() {
 
         {/* RIGHT SIDE IMAGE */}
         {/* Hidden on mobile to keep layout clean, shown from md+ */}
-        <div className="hidden md:flex w-1/2">
-          <div className="rounded-2xl flex justify-center items-center w-full">
-            <Image
-              src="/insta2.png"
-              alt="Dog"
-              width={400}
-              height={500}
-              className="object-contain"
-            />
-          </div>
-        </div>
+     <div className="hidden md:flex w-1/2">
+  <div className="rounded-2xl flex justify-center items-center w-full">
+    <Image
+      src="/insta2.png"
+      alt="Dog"
+      width={400}
+      height={500}
+      priority
+      className="object-contain w-auto h-auto"
+    />
+  </div>
+</div>
 
         {/* Mobile-only: smaller centered image below FAQs */}
         <div className="flex md:hidden w-full justify-center">
@@ -88,7 +89,8 @@ export default function FAQSection() {
             alt="Dog"
             width={260}
             height={320}
-            className="object-contain"
+            priority
+            className="object-contain w-auto h-auto"
           />
         </div>
 

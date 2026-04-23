@@ -24,25 +24,26 @@ export default function CTABanner() {
         </div>
 
         {/* Desktop: original absolute overlapping image */}
-        <div className="hidden md:block absolute right-10 -top-[260px]">
-          <Image
-            src="/image5.png"
-            alt="Dog"
-            width={420}
-            height={500}
-            className="object-contain drop-shadow-2xl"
-          />
+        <div className="hidden md:block absolute right-10 -top-[200px]">
+       <Image
+  src="/image5.png"
+  alt="Dog"
+  width={320}
+  height={300}
+  priority
+  className="object-contain drop-shadow-2xl w-auto h-auto"
+/>
         </div>
 
         {/* Mobile: right-side decorative image inside card */}
         <div className="md:hidden absolute right-0 bottom-0 h-full flex items-end pointer-events-none">
-          <Image
-            src="/image5.png"
-            alt="Dog"
-            width={140}
-            height={180}
-            className="object-contain drop-shadow-xl opacity-40"
-          />
+       <Image
+  src="/image5.png"
+  alt="Dog"
+  width={420}
+  height={500}
+  className="w-full h-auto object-contain drop-shadow-2xl"
+/>
         </div>
 
       </div>

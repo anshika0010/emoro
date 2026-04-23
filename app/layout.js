@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,16 +9,14 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-
-
 const akiraFont = localFont({
- src: "../public/akira_expanded/Akira Expanded Demo.otf",  
+  src: "../public/akira_expanded/Akira Expanded Demo.otf",
   variable: "--font-akira",
   display: "swap",
 });
 
 const futuraFont = localFont({
- src: "../public/futura-similar-fonts/Intrepid-Regular/intrepid.ttf",  
+  src: "../public/futura-similar-fonts/Intrepid-Regular/intrepid.ttf",
   variable: "--font-futura",
   display: "swap",
 });
@@ -32,13 +30,15 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable}  ${akiraFont.variable} ${futuraFont.variable} h-full antialiased`}
-    >   <div className="bg-[#f7f2ec] m-3 ">
-      <Navbar/>
-   
-      <body className="min-h-full flex flex-col">{children}</body>
-      <Footer/>
-      </div>
+      className={`${geistSans.variable} ${akiraFont.variable} ${futuraFont.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-[#f7f2ec] m-3">
+        <Navbar />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
