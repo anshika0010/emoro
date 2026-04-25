@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  background-color: antiquewhite;
+
+
+ 
+};
 
 @theme inline {
   --color-background: var(--background);
@@ -66,16 +68,16 @@ p {
 
 @keyframes float {
   0% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px) rotate(8deg);
+    transform: translateY(-20px);
   }
   100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 1s ease-in-out infinite; /* 🔥 faster (was maybe 3s+) */
 }

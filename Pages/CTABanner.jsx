@@ -4,7 +4,7 @@ export default function CTABanner() {
   return (
     <div className="w-full bg-[#f5f5f5] py-10 flex justify-center px-4 md:px-6">
 
-      <div className="w-full max-w-[1400px] bg-[#ff6a00] rounded-3xl px-6 sm:px-10 md:px-16 py-10 md:py-12 relative overflow-hidden md:overflow-visible flex items-center min-h-[260px] md:min-h-0">
+      <div className="w-full max-w-[1900px] bg-[#ff6a00] rounded-3xl px-6 sm:px-10 md:px-12 py-10 md:py-12 relative overflow-hidden md:overflow-visible flex items-center min-h-[260px] md:min-h-0">
 
         {/* Left Content */}
         <div className="max-w-[600px] text-white z-10 w-full md:w-auto">

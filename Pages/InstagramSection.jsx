@@ -2,12 +2,12 @@ import Image from "next/image";
 
 export default function InstagramSection() {
   return (
-    <div className="w-full bg-[#f3ede7] py-10 md:py-16 flex flex-col items-center px-4 md:px-6">
+    <div className="max-w-[1900px] mx-auto bg-[#f3ede7] py-10 md:py-16 flex flex-col items-center px-4 md:px-6">
 
       {/* Heading */}
       <div className="text-center max-w-[800px]">
         <h2 className="text-[#ff4d00] text-[22px] sm:text-[28px] md:text-[38px] font-extrabold uppercase leading-tight">
-          " "Follow Us <br /> For Daily Dog Happiness" "
+           "Follow Us <br /> For Daily Dog Happiness" 
         </h2>
 
         <p className="mt-3 md:mt-4 text-gray-600 text-[12px] sm:text-[13px] md:text-[14px]">
@@ -18,7 +18,7 @@ export default function InstagramSection() {
       </div>
 
       {/* Image Grid */}
-      <div className="mt-8 md:mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 w-full max-w-[1200px]">
+      <div className="mt-8 md:mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 w-full ">
         {[
           "/insta1.png",
           "/insta2.png",

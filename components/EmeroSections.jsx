@@ -15,17 +15,11 @@ export default function EmeroSections() {
         </h2>
 
         <p className="text-[15px] leading-relaxed text-gray-900 mb-5">
-          Emoro stands for trusted, science-backed pet care that goes beyond basic hydration.
-          Our advanced formula is designed with essential electrolytes and fast-absorbing nutrients
-          to deliver quick, effective results when your dog needs it most. Whether it&apos;s heat, exercise,
-          or daily wellness, Emoro Hydrate helps restore fluid balance, boost energy, and support
-          overall health.
+        We tackle the exact problems other brands gloss over. Walk down any pet aisle, and you'll find treats carrying hidden dangers, like cooked bones that easily shatter and cause severe internal injuries. You'll also find dry kibble that leaves your cat or dog in a constant state of mild dehydration. Emoro attacks these issues head-on. We engineered a 100% digestible, splinter-free chicken bone so your dog gets the chew they crave without the emergency vet visit.
         </p>
 
         <p className="text-[15px] leading-relaxed text-gray-900">
-          We focus on quality, safety, and real-life usability—using premium ingredients that are
-          carefully selected and tested for consistent performance. Easy to mix and suitable for
-          all dog breeds.
+    We also developed fast-acting electrolyte formulas that pull fluid straight into their cells, protecting their kidneys from strain. You choose us because you expect physical, measurable results you can actually see.
         </p>
       </section>
 
@@ -42,14 +36,11 @@ export default function EmeroSections() {
         </h2>
 
         <p className="text-[15px] leading-relaxed text-gray-900 mb-5">
-          Emoro was born from a simple observation—many dogs struggle with dehydration,
-          especially during heat, activity, and travel. We saw the need for a reliable, effective
-          solution that goes beyond basic care.
+        Emoro began from a simple observation in our own living rooms: our pets were running on empty. We watched our active dogs pant heavily, struggling to bounce back after a hot afternoon run. We noticed older cats quietly dealing with kidney stress simply because they naturally refuse to drink enough standing water. When we looked for answers on store shelves, we found nothing but sugar-heavy treats and dangerously brittle cooked bones.
         </p>
 
         <p className="text-[15px] leading-relaxed text-gray-900">
-          This inspired us to develop advanced hydration formulas that are easy to use,
-          fast-acting, and designed specifically for real-life pet needs.
+         That wasn't good enough. We teamed up with animal nutritionists and spent years testing mineral absorption and safe chew textures. The result is a pantry of supplements and rewards that protect your best friend from the inside out.
         </p>
       </section>
 

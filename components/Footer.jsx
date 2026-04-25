@@ -88,7 +88,18 @@ export default function Footer() {
             access to tips, hacks & special community-only offers. Enter your email below
           </p>
 
-          {/* Input + Button */}
+         
+        </div>
+
+        {/* Logo */}
+        <div className="justify-center items-center">
+          <img
+            src="/logo.png" // replace with your logo
+            alt="logo"
+            className="h-16 object-contain"
+          />
+
+           {/* Input + Button */}
           <div className="flex mt-4">
             <input
               type="text"
@@ -99,15 +110,6 @@ export default function Footer() {
               SUBSCRIBE
             </button>
           </div>
-        </div>
-
-        {/* Logo */}
-        <div className="flex justify-center items-center">
-          <img
-            src="/logo.png" // replace with your logo
-            alt="logo"
-            className="h-16 object-contain"
-          />
         </div>
       </div>
 

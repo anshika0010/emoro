@@ -3,24 +3,24 @@
 
 const achievements = [
   {
-    title: "TRUSTED BY PET OWNERS",
+    title: "TRUSTED BY DEVOTED PARENTS",
     description:
-      "Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness",
+      "We serve a dedicated community of owners who read every label and refuse to compromise on safety.",
   },
   {
-    title: "REAL IMPACT ON PET HEALTH",
+    title: "REAL IMPACT ON PET HEALTH:",
     description:
-      "Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness",
+      "Owners report distinct improvements in coat shine, joint f lexibility, and energy recovery in just a few weeks",
   },
   {
     title: "GROWING COMMUNITY",
     description:
-      "We are building a strong and passionate community of pet lovers who believe in better care and smarter wellness solutions.Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness",
+      "Thousands of pet owners have officially ditched dangerous rawhide and brittle bones for our safe, digestible alternatives.",
   },
   {
     title: "DESIGNED FOR EVERYDAY USE",
     description:
-      "We've created solutions that seamlessly fit into daily routines—making pet care easier, more effective, and stress-free for owners Emoro is proudly becoming a trusted choice among pet parents who prioritize their dog's health, hydration, and daily wellness",
+      "We make powders that mix instantly and treats that dogs obsess over, taking the friction out of your daily health routine.",
   },
 ];
 
@@ -46,16 +46,7 @@ export default function OurAchievement() {
 
               {/* Description */}
               <p className="mt-4 text-[15px] leading-relaxed text-gray-800 max-w-4xl">
-                At Emoro, every milestone reflects our commitment to improving
-                the health and well-being of dogs. While we continue to grow,
-                our achievements are rooted in trust, innovation, and real
-                results.At Emoro, every milestone reflects our commitment to improving
-                the health and well-being of dogs. While we continue to grow,
-                our achievements are rooted in trust, innovation, and real
-                results.At Emoro, every milestone reflects our commitment to improving
-                the health and well-being of dogs. While we continue to grow,
-                our achievements are rooted in trust, innovation, and real
-                results.
+             Our true measure of success isn't sales volume; it's the number of emergency vet visits we help pet parents avoid. Every time a senior dog gets up off the floor without stiffness, or an active pup recovers from a long hike without heat stress, we know we are doing our job.
               </p>
             </div>
 

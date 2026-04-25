@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <div className="px-4 py-4 max-w-[1700px] mx-auto">
+    <div className="px-4 py-4 max-w-[1900px] mx-auto">
       <div
         className="relative rounded-2xl overflow-hidden h-[400px] sm:h-[550px] md:h-[650px] lg:h-[750px] flex items-end"
         style={{
@@ -21,8 +21,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="mt-2 sm:mt-3 text-sm sm:text-base md:text-2xl text-gray-200">
-            Helping the pets we love live their best lives by our side by
-            providing them with the right nutrition.
+        Helping the pets we love live their best lives by our side by providing them with the right nutrition. From our advanced 12-in-1 mineral complex to radically safe, savory ancestral treats, we bridge the gap between instinct and modern wellness.
           </p>
 
           {/* Button */}

@@ -2,14 +2,14 @@ import Image from "next/image";
 
 export default function WhoWeAre() {
   return (
-    <div className="max-w-[1600px] mx-auto rounded-xl">
+    <div className="max-w-[1850px] mx-auto rounded-xl">
 
       {/* TOP SECTION */}
       <div
-        className="w-full relative px-6 sm:px-10 md:px-16 pt-10 md:pt-16 pb-6 bg-[#e9e1d8] bg-cover bg-center overflow-visible rounded-t-xl"
+        className="w-full relative px-12 pt-10 md:pt-16 pb-6 bg-[#e9e1d8] bg-cover bg-center overflow-visible rounded-t-xl"
         style={{ backgroundImage: "url('/boneimage.png')" }}
       >
-        <div className="max-w-[1200px] mx-auto">
+        <div className="">
           <h3 className="text-[#ff4d00] text-[20px] sm:text-[28px] md:text-[39px] uppercase font-semibold">
             Who We Are
           </h3>
@@ -28,28 +28,25 @@ export default function WhoWeAre() {
       </div>
 
       {/* BOTTOM SECTION */}
-      <div className="w-full bg-[#ff5a1f] px-6 sm:px-10 md:px-16 py-8 md:py-6 relative overflow-visible rounded-b-xl">
-        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-start gap-6 md:gap-0">
+      <div className="w-full bg-[#ff5a1f] px-6 sm:px-10 md:px-12 py-8 md:py-6 relative overflow-visible rounded-b-xl">
+        <div className=" flex flex-col md:flex-row items-start gap-6 md:gap-0">
 
           {/* LEFT TEXT */}
           <div className="w-full md:w-1/2 text-white">
             <p className="text-[14px] sm:text-[15px] leading-relaxed mb-6">
-              We are a team of passionate pet lovers dedicated to creating dog food that combines real, high-quality ingredients with scientifically balanced nutrition. Every formula is crafted with care to support your dog's health, happiness, and vitality — because we believe every dog deserves a life full of energy, love, and joy.
-            </p>
+We are a team of passionate pet lovers dedicated to creating holistic wellness products that combine real, high-quality ingredients with scientifically balanced nutrition. Every formula is crafted with care to support your pet's health, happiness, and vitality because we believe every dog and cat deserves a life full of energy, love, and joy.            </p>
 
             <p className="text-[14px] sm:text-[15px] leading-relaxed">
-              At the heart of our brand lies a commitment to uncompromised quality, transparency, and care. We source only the finest ingredients.
-            </p>
+At the heart of our brand lies a commitment to uncompromised quality, transparency, and care. We source only the finest ingredients to craft everything from our deeply nourishing multivitamin matrices to our splinter-free, safe chicken chews. We don't just feed pets; we fortify them.            </p>
           </div>
 
           {/* RIGHT IMAGE */}
-          {/* Desktop: overlapping absolute layout (original) */}
         <Image
   src="/image6.png"
   alt="Dog"
   width={500}
-  height={650}
-  className="object-contain w-auto h-auto"
+  height={690}
+  className="object-contain w-auto h-auto -mt-30"
 />
 
           {/* Mobile: normal flow image */}

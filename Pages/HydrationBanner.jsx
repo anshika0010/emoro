@@ -5,7 +5,7 @@ export default function HydrationBanner() {
     <div className="w-full bg-[#f5f5f5] flex justify-center px-4 md:px-6">
 
       <div
-        className="w-full max-w-[1600px] rounded-2xl overflow-hidden relative px-6 sm:px-10 md:px-16 py-10 sm:py-14 md:py-16 flex items-center bg-cover bg-center h-[380px] sm:h-[480px] md:h-[600px]"
+        className="w-full max-w-[1900px] rounded-2xl overflow-hidden relative px-6 sm:px-10 md:px-16 py-10 sm:py-14 md:py-16 flex items-center bg-cover bg-center h-[380px] sm:h-[480px] md:h-[600px]"
         style={{
           backgroundImage: "url('/image4.jpg')"
         }}
@@ -18,7 +18,10 @@ export default function HydrationBanner() {
           </h2>
 
           <p className="text-[12px] sm:text-[13px] md:text-[15px] leading-relaxed mb-6 md:mb-8 text-white/90 max-w-[90%] md:max-w-full">
-            Keep your dog active, and full of energy with a scientifically crafted hydration formula designed to combat dehydration effectively. Whether it's after playtime, run, travel, or recovery, this advanced blend helps quickly replenish lost fluids and essential electrolytes.
+Keep your dog active and full of energy with a scientifically crafted hydration formula
+designed to combat dehydration effectively. Whether it's after playtime, rigorous travel, or
+recovery, this advanced 30-serving blend helps quickly replenish lost fluids, delivering
+balanced electrolytes and vital energy support right when they need it most. 
           </p>
 
           {/* Buttons */}

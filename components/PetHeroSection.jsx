@@ -1,7 +1,7 @@
 export default function PetHeroSection() {
   return (
     <div className="w-full bg-[#f5f5f5] py-10 md:py-20 flex justify-center px-4 md:px-6">
-      <div className="w-full max-w-[1600px] bg-[#d9cfc6] rounded-xl relative overflow-visible">
+      <div className="w-full max-w-[1900px] bg-[#d9cfc6] rounded-xl relative overflow-visible">
 
         <div className="flex flex-col md:flex-row items-center relative min-h-[340px] md:min-h-[500px]">
 
@@ -11,7 +11,7 @@ export default function PetHeroSection() {
             <img
               src="/image2.png"
               alt="Pet Love"
-              className="absolute left-0 -top-[400px] h-[600px] object-contain drop-shadow-2xl"
+              className="absolute left-0 -top-[380px] h-[600px] object-contain drop-shadow-2xl"
             />
           </div>
 
@@ -20,22 +20,22 @@ export default function PetHeroSection() {
             <img
               src="/image2.png"
               alt="Pet Love"
-              className="h-[220px] sm:h-[260px] object-contain drop-shadow-2xl"
+              className="h-[250px] sm:h-[280px] object-contain drop-shadow-2xl"
             />
           </div>
 
           {/* Right Content */}
           <div className="w-full md:w-1/2 px-6 sm:px-8 md:px-10 py-8 md:py-12 md:ml-auto text-center md:text-left">
-            <h2 className="text-[22px] sm:text-[28px] md:text-[34px] font-extrabold text-[#ff3d00] leading-tight uppercase">
+            <h2 className="text-[20px] sm:text-[28px] md:text-[30px] font-extrabold text-[#ff3d00] leading-tight uppercase">
               Because They're More Than <br className="hidden sm:block" /> Just Pets 🐾
             </h2>
 
             <p className="mt-4 md:mt-6 text-gray-700 text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed max-w-[500px] mx-auto md:mx-0">
-              From tail-wagging happiness to purr-filled comfort, we bring you
-              premium-quality products crafted to support your pet's health and
-              happiness. Whether it's nutritious meals, tasty treats, or daily
-              essentials — everything is designed with care, so your pets feel
-              their best.
+             From tail-wagging happiness to purr-filled comfort, we bring you premium-quality products
+crafted to support your pet's health and happiness. Whether it's nutritious meals, tasty
+treats, or daily essentials everything is designed with care, so your pets feel their absolute
+best.
+
             </p>
           </div>
         </div>

@@ -61,7 +61,7 @@ export default function Navbar() {
       </div>
 
       {/* Navbar */}
-      <div className="w-full bg-[#d8cfc6] rounded-2xl px-6 lg:px-24 py-4 lg:py-6 text-xl flex items-center justify-between akira-regular relative">
+      <div className="w-full sticky top-0 z-50  bg-[#d8cfc6] rounded-2xl px-6 lg:px-18 py-4 lg:py-6 text-xl flex items-center justify-between akira-regular relative">
 
         {/* Left: Desktop Nav Links */}
         <div className="hidden lg:flex items-center gap-10 font-semibold text-gray-800 text-base">
