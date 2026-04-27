@@ -46,19 +46,10 @@ At the heart of our brand lies a commitment to uncompromised quality, transparen
   alt="Dog"
   width={500}
   height={690}
-  className="object-contain w-auto h-auto -mt-30"
+  className="object-contain w-auto h-auto -mt-10"
 />
 
-          {/* Mobile: normal flow image */}
-          <div className="block md:hidden w-full flex justify-center">
-          <Image
-  src="/image6.png"
-  alt="Dog"
-  width={300}
-  height={380}
-  className="object-contain mx-auto w-auto h-auto"
-/>
-          </div>
+   
 
         </div>
       </div>

@@ -72,9 +72,15 @@ function ArticleCard({ article }) {
   if (featured) {
     return (
       <div className="rounded-lg overflow-hidden shadow-md bg-[#f07800] flex flex-col">
-        <div className="relative w-full h-44">
-          <Image src="/dog1.png" alt={title} fill className="object-cover" />
-        </div>
+   <div className="relative w-full h-44">
+  <Image
+    src="/dog1.png"
+    alt={title}
+    fill
+    sizes="100vw"
+    className="object-cover"
+  />
+</div>
         <div className="p-3 flex flex-col gap-1">
           <span className="text-white text-[10px] font-extrabold uppercase tracking-widest">
             {category}
@@ -90,8 +96,15 @@ function ArticleCard({ article }) {
 
   return (
     <div className="rounded-lg overflow-hidden shadow-md bg-white flex flex-col">
-      <div className="relative w-full h-44">
-      <Image src="/dog1.png" alt={title} fill className="object-cover" />      </div>
+     <div className="relative w-full h-44">
+  <Image
+    src="/dog1.png"
+    alt={title}
+    fill
+    sizes="100vw"
+    className="object-cover"
+  />
+</div>
       <div className="p-3 flex flex-col gap-1">
         <span className="text-[#f07800] text-[10px] font-extrabold uppercase tracking-widest">
           {category}

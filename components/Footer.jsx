@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Explore */}
         <div>
           <h4 className="font-bold uppercase mb-3 text-gray-800">Explore</h4>
-          <ul className="space-y-2 text-gray-700 ">
+          <ul className="space-y-2 text-gray-700 futuraFont text-xl">
             <li>Home</li>
             <li>Shop by Products</li>
             <li>Our Services</li>
@@ -132,7 +132,7 @@ export default function Footer() {
         {/* Useful Links */}
         <div>
           <h4 className="font-bold uppercase mb-3 text-gray-800">Useful Links</h4>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-2 text-gray-700 futuraFont text-xl">
             <li>About</li>
             <li>Contact us</li>
             <li>FAQ</li>
@@ -144,7 +144,7 @@ export default function Footer() {
         {/* Social Media */}
         <div>
           <h4 className="font-bold uppercase mb-3 text-gray-800">Social Media</h4>
-          <ul className="space-y-2 text-gray-700">
+          <ul className="space-y-2 text-gray-700 futuraFont text-xl">
             <li>Instagram</li>
             <li>Facebook</li>
             <li>Twitter</li>
@@ -156,7 +156,7 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h4 className="font-bold uppercase mb-3 text-gray-800">Social Media</h4>
-          <ul className="space-y-3 text-gray-700">
+          <ul className="space-y-3 text-gray-700 futuraFont text-xl">
             <li className="flex items-center gap-2">
               📧 sales@loveemoro.com
             </li>
@@ -172,12 +172,12 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-700">
-        <div className="flex items-center gap-2">
-          <img src="/emoro-logo.png" alt="logo" className="h-12" />
+        <div className="flex items-center gap-1">
+          <img src="/logo.png" alt="logo" className="h-8" />
         </div>
 
-        <div className="flex gap-10 mt-3 md:mt-0">
-          <span>Return</span>
+        <div className="flex gap-10 mt-1 md:mt-0 futuraFont">
+          <span className="futuraFont">Return</span>
           <span>Privacy policy</span>
           <span>Support</span>
         </div>

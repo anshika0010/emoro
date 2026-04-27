@@ -41,11 +41,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  font-family: var(--font-futura), cursive;
+  font-family: var(--font-futura);
   font-size: 22px;
   line-height: 2rem;
   font-weight: 500; 
 
+}
+@media (max-width: 768px) {
+  p {font-family: var(--font-futura);
+    font-size: 15px;
+    line-height: 1.3;
+  }
 }
 .color {
   color: #ff4200;

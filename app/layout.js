@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${akiraFont.variable} ${futuraFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#f7f2ec] m-3">
+      <body className="min-h-full  bg-[#f7f2ec] m-3">
         <Navbar />
         <main className="flex-1">
           {children}

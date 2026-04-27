@@ -10,16 +10,18 @@ export default function page() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
         
         {/* Left Image */}
-        <div className="w-full md:w-1/2">
-          <div className="relative w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
-            <Image
-              src="/blog1.png" 
-              alt="Pet Care"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
+     <div className="w-full md:w-1/2">
+  <div className="relative w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
+    <Image
+      src="/blog1.png"
+      alt="Pet Care"
+      fill
+      sizes="(max-width: 768px) 100vw, 50vw"
+      className="object-cover"
+      priority
+    />
+  </div>
+</div>
 
         {/* Right Content */}
         <div className="w-full md:w-1/2 text-gray-700">
