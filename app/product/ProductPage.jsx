@@ -1,53 +1,70 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
-const categories = [
-  "ALL",
-  "ELECTROLYTES",
-  "FAT BURNER",
-  "HAIR & SKIN",
-  "HAIR & SKIN",
-  "PROTEIN & SUPPLEMENT",
-  "MULTI VITAMINS",
-  "BRAIN HEALTH & DEMENTIA",
-  "SHAMPOO",
-  "TOOTHPASTE",
-  "SKIN & COAT",
-];
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const filters = [
-  { label: "SORT BY", open: false },
-  { label: "PRODUCT TYPE", open: false },
-  { label: "LIFE STAGE", open: false },
-  { label: "FLAVOUR", open: false },
-  { label: "INGREDIENTS", open: false },
-  { label: "BREED SIZE", open: false },
-  { label: "SPECIAL FORMULA", open: false },
-  { label: "FOOD FORM", open: false },
+  { label: "SORT BY" },
+  { label: "PRODUCT TYPE" },
+  { label: "LIFE STAGE" },
+  { label: "FLAVOUR" },
+  { label: "INGREDIENTS" },
+  { label: "BREED SIZE" },
+  { label: "SPECIAL FORMULA" },
+  { label: "FOOD FORM" },
 ];
 
-const products = Array(6).fill({
-  name: "FROM TAIL-WAGGING HAPPINESS TO PURR-FILLED COMFORT",
-  weight: "700RS",
-  image: null,
-});
-
 function ProductCard({ product }) {
+  const imageUrl = product.images?.featured_image || "/product.png";
+  const [wishlisted, setWishlisted] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const isOutOfStock = product.stock_status === "out_of_stock";
+
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className="flex flex-col gap-2"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       {/* Product Image */}
-      <div className="bg-[#f0ebe3] rounded-lg flex items-center justify-center h-[400px] overflow-hidden">
-  
-  <Image
-          src="/product.png" // 👈 put your image in /public/images
-          alt="Product"
+      <div className="bg-[#f0ebe3] rounded-lg flex items-center justify-center h-[400px] overflow-hidden relative">
+        <Image
+          src={imageUrl}
+          alt={product.name}
           width={600}
           height={600}
           className="object-contain h-auto"
+          unoptimized
         />
 
+        {/* Wishlist Button — appears on hover, stays if wishlisted */}
+        <button
+          onClick={() => setWishlisted((w) => !w)}
+          className={`absolute top-3 right-3 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+            hovered || wishlisted
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
+        >
+          <svg
+            className={`w-5 h-5 transition-colors duration-200 ${
+              wishlisted ? "text-red-500 fill-red-500" : "text-gray-400"
+            }`}
+            fill={wishlisted ? "currentColor" : "none"}
+            stroke="currentColor"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+        </button>
       </div>
 
       {/* Product Info */}
@@ -55,19 +72,38 @@ function ProductCard({ product }) {
         <h3 className="text-[20px] font-bold text-gray-800 leading-tight uppercase tracking-wide">
           {product.name}
         </h3>
-        <div className="flex items-center gap-1">
-          <span className="text-orange-500 font-bold text-md">{product.weight}</span>
-          <span className="text-gray-400 text-md line-through">₹999</span>
+        <div className="flex items-center gap-2">
+          <span className="text-orange-500 font-bold text-md">
+            ₹{product.sell_price}
+          </span>
+          {product.mrp && (
+            <span className="text-gray-400 text-md line-through">
+              ₹{product.mrp}
+            </span>
+          )}
+          {isOutOfStock && (
+            <span className="text-xs text-red-500 font-semibold ml-1">
+              Out of Stock
+            </span>
+          )}
         </div>
       </div>
 
       {/* Buttons */}
-      <button className="w-full border-2 border-orange-500 text-orange-500 font-bold text-md py-4 rounded hover:bg-orange-500 hover:text-white transition-colors duration-200 uppercase tracking-widest">
+      <button
+        disabled={isOutOfStock}
+        className="w-full border-2 border-orange-500 text-orange-500 font-bold text-md py-4 rounded hover:bg-orange-500 hover:text-white transition-colors duration-200 uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed"
+      >
         Add to Cart
       </button>
-      <button className="w-full bg-orange-500 text-white font-bold text-md py-4 rounded hover:bg-orange-600 transition-colors duration-200 uppercase tracking-widest">
+      <Link
+        href={isOutOfStock ? "#" : `/product/${product.slug}`}
+        className={`w-full bg-orange-500 text-white font-bold text-md py-4 rounded hover:bg-orange-600 transition-colors duration-200 uppercase tracking-widest text-center block ${
+          isOutOfStock ? "opacity-50 pointer-events-none cursor-not-allowed" : ""
+        }`}
+      >
         Buy Now
-      </button>
+      </Link>
     </div>
   );
 }
@@ -89,18 +125,94 @@ function FilterItem({ label }) {
 
 export default function ProductPage() {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [activeCategoryId, setActiveCategoryId] = useState(null);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const row1 = categories.slice(0, 4);
-  const row2 = categories.slice(4, 8);
-  const row3 = categories.slice(8);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState(null);
+
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [error, setError] = useState("");
+
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/category`, {
+          headers: { Accept: "application/json" },
+        });
+        const data = await res.json();
+        if (data.status === 200) {
+          setCategories(data.data);
+        }
+      } catch (err) {
+        console.error("Category fetch error:", err);
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoadingProducts(true);
+      setError("");
+      try {
+        const params = new URLSearchParams();
+        params.append("page", currentPage);
+        if (activeCategoryId) params.append("category_id", activeCategoryId);
+        if (search.trim()) params.append("search", search.trim());
+
+        const res = await fetch(`${API_BASE_URL}/products?${params.toString()}`, {
+          headers: { Accept: "application/json" },
+        });
+        const data = await res.json();
+        if (data.status === 200) {
+          setProducts(data.data);
+          setPagination(data.pagination);
+        } else {
+          setError("Failed to load products.");
+        }
+      } catch (err) {
+        setError("Network error. Please try again.");
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+    fetchProducts();
+  }, [activeCategoryId, currentPage, search]);
+
+  const handleCategoryClick = (cat) => {
+    setActiveCategory(cat.name.toUpperCase());
+    setActiveCategoryId(cat.id);
+    setCurrentPage(1);
+  };
+
+  const handleAllClick = () => {
+    setActiveCategory("ALL");
+    setActiveCategoryId(null);
+    setCurrentPage(1);
+  };
+
+  // Debounce search
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCurrentPage(1);
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, [search]);
+
+  const totalPages = pagination?.last_page || 1;
 
   return (
     <div className="min-h-screen bg-[#f5f0e8] font-sans">
       {/* Header */}
       <div className="text-center pt-10 pb-6 px-4 relative">
-        {/* Decorative tags */}
         <div className="absolute top-6 left-8 w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center rotate-12 shadow-md">
           <span className="text-white text-xs">🏷</span>
         </div>
@@ -111,69 +223,47 @@ export default function ProductPage() {
         <p className="text-xl uppercase tracking-widest text-orange-500 mb-1">
           Explore our all
         </p>
-        <h1
-          className="text-5xl md:text-8xl text-orange-500 uppercase leading-none"
-
-        >
+        <h1 className="text-5xl md:text-8xl text-orange-500 uppercase leading-none">
           PRODUCT
         </h1>
         <p className="text-xs text-gray-500 mt-3 max-w-3xl mx-auto leading-relaxed">
           Explore our range of advanced hydration solutions specially designed
-          for dogs of all sizes and activity levels.  Explore our range of advanced hydration solutions specially designed
-          for dogs of all sizes and activity levels.
+          for dogs of all sizes and activity levels. Explore our range of
+          advanced hydration solutions specially designed for dogs of all sizes
+          and activity levels.
         </p>
       </div>
 
       {/* Category Tabs */}
-      <div className="flex flex-col items-center gap-2 px-4 pb-6">
-        {/* Row 1 */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {row1.map((cat, i) => (
-                      <button
-              key={i}
-              onClick={() => setActiveCategory(cat)}
+      <div className="flex flex-wrap justify-center gap-2 px-4 pb-6">
+        <button
+          onClick={handleAllClick}
+          className={`px-6 py-3 rounded-xl text-md font-bold uppercase tracking-wider border transition-all duration-200 ${
+            activeCategory === "ALL"
+              ? "bg-orange-500 text-white border-orange-500 shadow"
+              : "bg-white text-gray-700 border-orange-500 hover:border-orange-400 hover:text-orange-500"
+          }`}
+        >
+          ALL
+        </button>
+
+        {loadingCategories ? (
+          <span className="text-sm text-gray-400 self-center">Loading...</span>
+        ) : (
+          categories.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => handleCategoryClick(cat)}
               className={`px-6 py-3 rounded-xl text-md font-bold uppercase tracking-wider border transition-all duration-200 ${
-                activeCategory === cat
+                activeCategory === cat.name.toUpperCase()
                   ? "bg-orange-500 text-white border-orange-500 shadow"
-                  : "bg-white text-gray-700 px-9 py-3 border-orange-500 hover:border-orange-400 hover:text-orange-500"
+                  : "bg-white text-gray-700 border-orange-500 hover:border-orange-400 hover:text-orange-500"
               }`}
             >
-              {cat}
+              {cat.name}
             </button>
-          ))}
-        </div>
-        {/* Row 2 */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {row2.map((cat, i) => (
-                      <button
-              key={i}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 rounded-xl text-md font-bold uppercase tracking-wider border transition-all duration-200 ${
-                activeCategory === cat
-                  ? "bg-orange-500 text-white border-orange-500 shadow"
-                  : "bg-white text-gray-700 px-9 py-3 border-orange-500 hover:border-orange-400 hover:text-orange-500"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-        {/* Row 3 */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {row3.map((cat, i) => (
-                 <button
-              key={i}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 rounded-xl text-md font-bold uppercase tracking-wider border transition-all duration-200 ${
-                activeCategory === cat
-                  ? "bg-orange-500 text-white border-orange-500 shadow"
-                  : "bg-white text-gray-700 px-9 py-3 border-orange-500 hover:border-orange-400 hover:text-orange-500"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+          ))
+        )}
       </div>
 
       {/* Main Content */}
@@ -220,28 +310,62 @@ export default function ProductPage() {
             </div>
           </div>
 
+          {/* Error */}
+          {error && (
+            <div className="mb-4 text-red-500 text-sm font-semibold">{error}</div>
+          )}
+
           {/* Products Grid */}
-          <div className="grid grid-cols-3 gap-5">
-            {products.map((product, i) => (
-              <ProductCard key={i} product={product} />
-            ))}
-          </div>
+          {loadingProducts ? (
+            <div className="grid grid-cols-3 gap-5">
+              {Array(6).fill(0).map((_, i) => (
+                <div key={i} className="flex flex-col gap-2 animate-pulse">
+                  <div className="bg-gray-200 rounded-lg h-[400px]" />
+                  <div className="bg-gray-200 h-5 rounded w-3/4 mx-4" />
+                  <div className="bg-gray-200 h-4 rounded w-1/4 mx-4" />
+                  <div className="bg-gray-200 h-12 rounded" />
+                  <div className="bg-gray-200 h-12 rounded" />
+                </div>
+              ))}
+            </div>
+          ) : products.length === 0 ? (
+            <div className="text-center py-20 text-gray-400 text-lg font-semibold uppercase tracking-widest">
+              No products found.
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-5">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-4 mt-10">
-            <button className="w-12 h-12 rounded bg-orange-500 text-white text-md font-bold flex items-center justify-center">
-              1
-            </button>
-            <button className="w-12 h-12 rounded bg-orange-500 text-white text-md font-bold flex items-center justify-center">
-              2
-            </button>
-            <button className="w-12 h-12 rounded bg-orange-500 text-white text-md font-bold flex items-center justify-center">
-              3
-            </button>
-            <button className="w-12 h-12 rounded bg-orange-500 text-white text-md font-bold flex items-center justify-center">
-              ››
-            </button>
-          </div>
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-4 mt-10">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-12 h-12 rounded font-bold text-md flex items-center justify-center transition-colors ${
+                    currentPage === page
+                      ? "bg-orange-600 text-white"
+                      : "bg-orange-500 text-white hover:bg-orange-600"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              {currentPage < totalPages && (
+                <button
+                  onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                  className="w-12 h-12 rounded bg-orange-500 text-white font-bold text-md flex items-center justify-center hover:bg-orange-600"
+                >
+                  ››
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

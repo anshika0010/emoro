@@ -10,8 +10,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-    image:
-      "",
+    image: "",
     featured: false,
   },
   {
@@ -20,8 +19,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-   image:
-      "",
+    image: "",
     featured: true,
   },
   {
@@ -30,8 +28,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-   image:
-      "",
+    image: "",
     featured: false,
   },
   {
@@ -40,8 +37,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-   image:
-      "",
+    image: "",
     featured: false,
   },
   {
@@ -50,8 +46,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-   image:
-      "",
+    image: "",
     featured: true,
   },
   {
@@ -60,8 +55,7 @@ const articles = [
     title: "Why Hydration Is Essential For Your Dog's Health",
     excerpt:
       "Expert insights on dog hydration, wellness, and everyday care to help your pet stay healthy, active, and happy.",
-    image:
-      "",
+    image: "",
     featured: false,
   },
 ];
@@ -72,23 +66,28 @@ function ArticleCard({ article }) {
   if (featured) {
     return (
       <div className="rounded-lg overflow-hidden shadow-md bg-[#f07800] flex flex-col">
-   <div className="relative w-full h-44">
-  <Image
-    src="/dog1.png"
-    alt={title}
-    fill
-    sizes="100vw"
-    className="object-cover"
-  />
-</div>
+        <div className="relative w-full h-44">
+          <Image
+            src="/dog1.png"
+            alt={title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
         <div className="p-3 flex flex-col gap-1">
           <span className="text-white text-[10px] font-extrabold uppercase tracking-widest">
             {category}
           </span>
-          <h3 className="text-white font-black uppercase text-[12px] leading-tight tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+          <h3
+            className="text-white font-black uppercase text-[12px] leading-tight tracking-tight"
+            style={{ fontFamily: "'Oswald', sans-serif" }}
+          >
             {title}
           </h3>
-          <p className="text-orange-100 text-[10px] leading-snug mt-0.5">{excerpt}</p>
+          <p className="text-orange-100 text-[10px] leading-snug mt-0.5">
+            {excerpt}
+          </p>
         </div>
       </div>
     );
@@ -96,23 +95,28 @@ function ArticleCard({ article }) {
 
   return (
     <div className="rounded-lg overflow-hidden shadow-md bg-white flex flex-col">
-     <div className="relative w-full h-44">
-  <Image
-    src="/dog1.png"
-    alt={title}
-    fill
-    sizes="100vw"
-    className="object-cover"
-  />
-</div>
+      <div className="relative w-full h-44">
+        <Image
+          src="/dog1.png"
+          alt={title}
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
       <div className="p-3 flex flex-col gap-1">
         <span className="text-[#f07800] text-[10px] font-extrabold uppercase tracking-widest">
           {category}
         </span>
-        <h3 className="text-gray-900 font-black uppercase text-[12px] leading-tight tracking-tight" style={{ fontFamily: "'Oswald', sans-serif" }}>
+        <h3
+          className="text-gray-900 font-black uppercase text-[12px] leading-tight tracking-tight"
+          style={{ fontFamily: "'Oswald', sans-serif" }}
+        >
           {title}
         </h3>
-        <p className="text-gray-500 text-[10px] leading-snug mt-0.5">{excerpt}</p>
+        <p className="text-gray-500 text-[10px] leading-snug mt-0.5">
+          {excerpt}
+        </p>
       </div>
     </div>
   );
@@ -149,8 +153,6 @@ export default function InsightsTrends() {
 
   return (
     <>
-   
-
       <section className="max-w-[1600px] mx-auto px-4 py-8 bg-[#f5f5f5] min-h-screen">
         {/* Section Label */}
         <p className="text-[#f07800] text-[10px] font-extrabold uppercase tracking-[0.2em] mb-2 flex items-center gap-1">

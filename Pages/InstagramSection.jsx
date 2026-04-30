@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useRef } from "react";
 
 export default function InstagramSection() {
@@ -21,26 +21,26 @@ export default function InstagramSection() {
       await import("swiper/css/pagination");
 
       if (swiperRef.current) {
-       new Swiper(swiperRef.current, {
-  modules: [Navigation, Pagination],
-  slidesPerView: 1,
-  spaceBetween: 16,
-  loop: posts.length > 4, // 👈 smart fix
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  breakpoints: {
-    480: { slidesPerView: 1.2 },
-    640: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-    1280: { slidesPerView: 4 },
-  },
-});
+        new Swiper(swiperRef.current, {
+          modules: [Navigation, Pagination],
+          slidesPerView: 1,
+          spaceBetween: 16,
+          loop: posts.length > 4,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            480: { slidesPerView: 1.2 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
+          },
+        });
       }
     };
 
@@ -49,7 +49,6 @@ export default function InstagramSection() {
 
   return (
     <div className="max-w-[1900px] mx-auto bg-[#f3ede7] py-8 sm:py-10 md:py-16 flex flex-col items-center px-3 sm:px-4 md:px-6">
-
       {/* Heading */}
       <div className="text-center max-w-[800px]">
         <h2 className="text-[#ff4d00] text-[20px] sm:text-[28px] md:text-[38px] font-extrabold uppercase leading-tight">
@@ -78,9 +77,12 @@ export default function InstagramSection() {
                     height="600"
                     frameBorder="0"
                     scrolling="no"
-                 
                     loading="lazy"
-                    style={{ display: "block", border: "none", overflow: "hidden" }}
+                    style={{
+                      display: "block",
+                      border: "none",
+                      overflow: "hidden",
+                    }}
                   />
                 </div>
               </div>
@@ -110,7 +112,10 @@ export default function InstagramSection() {
           />
 
           {/* Pagination Dots */}
-          <div className="swiper-pagination" style={{ marginTop: "16px", position: "relative", bottom: "unset" }} />
+          <div
+            className="swiper-pagination"
+            style={{ marginTop: "16px", position: "relative", bottom: "unset" }}
+          />
         </div>
       </div>
 
@@ -140,7 +145,6 @@ export default function InstagramSection() {
           opacity: 1;
         }
       `}</style>
-
     </div>
   );
 }

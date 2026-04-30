@@ -1,5 +1,5 @@
 "use client";
-import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X , Heart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -48,6 +48,7 @@ export default function Navbar() {
             {[
               { href: "/search", icon: <Search size={18} /> },
               { href: "/cart", icon: <ShoppingCart size={18} /> },
+                 { href: "/wishlist", icon: <Heart size={18} /> },
               { href: "/login", icon: <User size={18} /> },
             ].map((item, i) => (
               <Link key={i} href={item.href} onClick={() => setIsOpen(false)} className="flex-1">
@@ -93,10 +94,11 @@ export default function Navbar() {
             {[
               { href: "/search", icon: <Search size={18} /> },
               { href: "/cart", icon: <ShoppingCart size={18} /> },
+               { href: "/wishlist", icon: <Heart size={18} /> },
               { href: "/login", icon: <User size={18} /> },
             ].map((item, i) => (
               <Link key={i} href={item.href}>
-                <div className="bg-orange-500 p-3 rounded-lg text-white cursor-pointer hover:bg-orange-600 transition-colors">
+                <div className="bg-orange-500 p-3 rounded-lg text-white cursor-pointer hover:bg-gray-400 transition-colors">
                   {item.icon}
                 </div>
               </Link>

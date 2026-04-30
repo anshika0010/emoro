@@ -6,7 +6,7 @@ export default function HeroBgSection() {
 
       {/* Background Image */}
       <Image
-        src="/productbanner.jpg" // 👈 put your image in /public/images
+        src="/productbanner.jpg" 
         alt="Dog Product"
         fill
         priority

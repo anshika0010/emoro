@@ -3,15 +3,57 @@
 import Image from "next/image";
 import { useState } from "react";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login attempted", { email, password, rememberMe });
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          const firstError = Object.values(data.errors)[0];
+          setError(Array.isArray(firstError) ? firstError[0] : firstError);
+        } else {
+          setError(data.message || "Login failed. Please try again.");
+        }
+        return;
+      }
+
+      // Save token
+      if (rememberMe) {
+        localStorage.setItem("auth_token", data.token ?? data.data?.token);
+      } else {
+        sessionStorage.setItem("auth_token", data.token ?? data.data?.token);
+      }
+
+      // Redirect after successful login
+      window.location.href = "/userprofile/overview";
+    } catch (err) {
+      setError("Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,10 +90,7 @@ export default function LoginPage() {
               </svg>
             </div>
             <div>
-              <h1
-                className="text-3xl font-extrabold uppercase text-gray-800"
-             
-              >
+              <h1 className="text-3xl font-extrabold uppercase text-gray-800">
                 Login to Your Account
               </h1>
               <p className="text-xl text-gray-500 mt-1 leading-relaxed max-w-xl">
@@ -61,14 +100,18 @@ export default function LoginPage() {
             </div>
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="mb-5 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-sm">
+              {error}
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5">
             {/* Email */}
             <div>
-              <label
-                className="block text-[20px] font-black tracking-[0.18em] uppercase text-gray-700 mb-2"
-      
-              >
+              <label className="block text-[20px] font-black tracking-[0.18em] uppercase text-gray-700 mb-2">
                 Email
               </label>
               <div className="relative">
@@ -92,6 +135,7 @@ export default function LoginPage() {
                   placeholder="Email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="w-full pl-11 pr-4 py-3 bg-[#e8e0d8] rounded-xl text-sm text-gray-600 placeholder-gray-400 outline-none focus:ring-2 focus:ring-orange-400 transition-all"
                 />
               </div>
@@ -99,10 +143,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label
-                className="block text-[20px] font-black tracking-[0.18em] uppercase text-gray-700 mb-2"
-            
-              >
+              <label className="block text-[20px] font-black tracking-[0.18em] uppercase text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -126,6 +167,7 @@ export default function LoginPage() {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                   className="w-full pl-11 pr-12 py-3 bg-[#e8e0d8] rounded-xl text-sm text-gray-600 placeholder-gray-400 outline-none focus:ring-2 focus:ring-orange-400 transition-all"
                 />
                 <button
@@ -194,10 +236,7 @@ export default function LoginPage() {
                     </svg>
                   )}
                 </div>
-                <span
-                  className="text-[20px] font-black tracking-[0.15em] uppercase text-gray-700"
-           
-                >
+                <span className="text-[20px] font-black tracking-[0.15em] uppercase text-gray-700">
                   Remember Me
                 </span>
               </label>
@@ -205,7 +244,6 @@ export default function LoginPage() {
               <a
                 href="/forgetpassword"
                 className="text-[20px] font-black tracking-[0.15em] uppercase text-gray-700 underline underline-offset-2 hover:text-orange-500 transition-colors"
-             
               >
                 Forgot Password?
               </a>
@@ -214,18 +252,16 @@ export default function LoginPage() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-black text-sm tracking-[0.2em] uppercase rounded-xl transition-all duration-200 active:scale-[0.98] shadow-md hover:shadow-lg"
+              disabled={loading}
+              className="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-black text-xl tracking-[0.2em] uppercase rounded-xl transition-all duration-200 active:scale-[0.98] shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
               style={{ fontFamily: "'Trebuchet MS', sans-serif" }}
             >
-              Login
+              {loading ? "Logging in..." : "Login →"}
             </button>
           </form>
 
           {/* Register Link */}
-          <p
-            className="mt-6 text-center text-[10px] font-bold tracking-[0.12em] uppercase text-gray-500"
-          
-          >
+          <p className="mt-6 text-center text-[10px] font-bold tracking-[0.12em] uppercase text-gray-500">
             Don&apos;t have account?{" "}
             <a
               href="/register"

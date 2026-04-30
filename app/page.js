@@ -2,6 +2,7 @@ import DogFoodBanner from "@/components/DogFoodBanner";
 import FAQSection from "@/components/FAQSection";
 import HeroSection from "@/components/HeroSection";
 import PetHeroSection from "@/components/PetHeroSection";
+import ProductSlider from "@/components/ProductSlider";
 import WhoWeAre from "@/components/WhoWeAre";
 import ClothBagsPage from "@/Pages/ClothBagsPage";
 import CTABanner from "@/Pages/CTABanner";
@@ -15,6 +16,7 @@ export default function Home() {
       <main className="">
         <HeroSection/>
         <WhoWeAre/>
+        <ProductSlider/>
         <DogFoodBanner/>
         <PetHeroSection/>
         <HydrationBanner/>
