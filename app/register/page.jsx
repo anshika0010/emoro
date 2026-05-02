@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Mail, User, Phone, Lock } from "lucide-react";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -91,14 +92,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="w-full min-h-screen flex">
+    <div className="w-full min-h-screen flex mt-4">
       {/* LEFT FORM */}
       <div className="w-1/2 bg-[#e9e1d8] flex items-center justify-center py-10">
         <div className="w-[700px]">
           {/* Heading */}
           <div className="flex items-start gap-4 mb-6">
             <div className="bg-[#d8cec5] p-3 rounded-md">
-              <span className="text-xl">👤</span>
+                <User className="mr-2 w-14 h-14 text-gray-900" />
             </div>
             <div>
               <h2 className="font-bold text-4xl uppercase">
@@ -127,7 +128,8 @@ export default function RegisterPage() {
           <div className="mb-4">
             <label className="text-sm font-semibold">FULL NAME</label>
             <div className="flex items-center bg-[#d8cec5] rounded-md mt-2 px-3 py-4">
-              <span className="mr-2">👤</span>
+                       <User className="mr-2 w-5 h-5 text-gray-600" />
+
               <input
                 type="text"
                 name="name"
@@ -143,7 +145,7 @@ export default function RegisterPage() {
           <div className="mb-4">
             <label className="text-sm font-semibold">EMAIL</label>
             <div className="flex items-center bg-[#d8cec5] rounded-md mt-2 px-3 py-4">
-              <span className="mr-2">✉️</span>
+                <Mail className="mr-2 w-5 h-5 text-gray-600" />
               <input
                 type="email"
                 name="email"
@@ -159,7 +161,8 @@ export default function RegisterPage() {
           <div className="mb-4">
             <label className="text-sm font-semibold">PHONE</label>
             <div className="flex items-center bg-[#d8cec5] rounded-md mt-2 px-3 py-4 gap-2">
-              <span className="mr-1">📞</span>
+                     <Phone className="mr-2 w-5 h-5 text-gray-600" />
+
               <select
                 name="country_code"
                 value={formData.country_code}
@@ -189,7 +192,8 @@ export default function RegisterPage() {
           <div className="mb-4">
             <label className="text-sm font-semibold">PASSWORD</label>
             <div className="flex items-center bg-[#d8cec5] rounded-md mt-2 px-3 py-4">
-              <span className="mr-2">🔒</span>
+                        <Lock className="mr-2 w-5 h-5 text-gray-600" />
+
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -211,7 +215,8 @@ export default function RegisterPage() {
           <div className="mb-4">
             <label className="text-sm font-semibold">PASSWORD CONFIRMATION</label>
             <div className="flex items-center bg-[#d8cec5] rounded-md mt-2 px-3 py-4">
-              <span className="mr-2">🔒</span>
+                                   <Lock className="mr-2 w-5 h-5 text-gray-600" />
+
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="password_confirmation"
@@ -250,7 +255,7 @@ export default function RegisterPage() {
             {loading ? "REGISTERING..." : "REGISTER →"}
           </button>
 
-          <p className="text-center text-sm mt-6 font-semibold">
+          <p className="text-center text-md mt-6 font-semibold akira-regular">
             ALREADY HAVE AN ACCOUNT?{" "}
             <Link href="/login" className="underline cursor-pointer">
               LOGIN
@@ -260,13 +265,13 @@ export default function RegisterPage() {
       </div>
 
       {/* RIGHT IMAGE */}
-      <div className="w-1/2 relative">
+      <div className="w-1/2 relative ">
         <Image
           src="/loginbanner.png"
           alt="Register"
           width={800}
-          height={600}
-          className="object-cover"
+          height={400}
+          className="object-cover h-[1100px]"
         />
       </div>
     </div>

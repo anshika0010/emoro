@@ -78,7 +78,7 @@ export default function HeroSection() {
         </button>
 
         {/* Content */}
-        <div className="relative z-10 p-5 sm:p-6 md:p-8 max-w-3xl text-white">
+        <div className="relative z-10 p-5 sm:p-6 md:p-8 max-w-5xl text-white">
           {/* Tag */}
           <span className="inline-block bg-orange-500/80 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-3">
             {slide.tag}

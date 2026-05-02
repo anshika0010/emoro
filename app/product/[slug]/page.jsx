@@ -29,7 +29,6 @@ function StarRating({ rating, count }) {
   );
 }
 
-// Skeleton loader
 function ProductSkeleton() {
   return (
     <div className="min-h-screen bg-[#f0ebe3] flex items-center justify-center px-4 py-4">
@@ -76,7 +75,7 @@ export default function ProductDetail() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [wishlisted, setWishlisted] = useState(false);
-  const [openId, setOpenId] = useState(null);
+  const [openId, setOpenId] = useState(new Set(["overview"]));
 
   useEffect(() => {
     if (!slug) return;
@@ -91,8 +90,13 @@ export default function ProductDetail() {
         if (data.status === 200) {
           setProduct(data.product);
           setImages(data.images);
-          setFaqs(data.faq || []);
+          const apiFaqs = data.faq || [];
+          setFaqs(apiFaqs);
           setReviewCount(data.review_count || 0);
+          // Open first FAQ by default once loaded
+          if (apiFaqs.length > 0) {
+            setOpenId((prev) => new Set([...prev, `faq-${apiFaqs[0].id}`]));
+          }
         } else {
           setError("Product not found.");
         }
@@ -105,11 +109,17 @@ export default function ProductDetail() {
     fetchProduct();
   }, [slug]);
 
-  const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
+  const toggle = (id) => {
+    setOpenId((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
   const handleDecrease = () => setQuantity((q) => Math.max(1, q - 1));
   const handleIncrease = () => setQuantity((q) => q + 1);
 
-  // Build image gallery from API
   const galleryImages = images
     ? [
         images.featured_image,
@@ -119,7 +129,6 @@ export default function ProductDetail() {
       ].filter(Boolean)
     : [];
 
-  // Accordion sections from API data
   const sections = product
     ? [
         {
@@ -132,6 +141,12 @@ export default function ProductDetail() {
           id: "description",
           title: "DESCRIPTION",
           content: product.description,
+          isHtml: true,
+        },
+         {
+          id: "supplementfacts",
+          title: "SUPPLEMENT-FACTS",
+          content: product.supplementfacts,
           isHtml: true,
         },
       ]
@@ -151,17 +166,16 @@ export default function ProductDetail() {
   return (
     <>
       <div className="min-h-screen bg-[#f0ebe3] flex items-center justify-center px-4 py-4">
-        <div className="bg-[#f0ebe3] max-w-[1600px] w-full mx-auto">
+        <div className="bg-[#f0ebe3] max-w-[1800px] w-full mx-auto">
           <div className="flex flex-col md:flex-row gap-6">
             {/* LEFT — Thumbnail Strip + Main Image */}
             <div className="flex gap-5 flex-1">
-              {/* Thumbnails */}
               <div className="flex flex-col gap-2">
                 {galleryImages.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setSelectedImage(i)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                    className={`w-40 h-40 rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImage === i
                         ? "border-[#f07800] shadow-md"
                         : "border-transparent opacity-70 hover:opacity-100"
@@ -179,7 +193,6 @@ export default function ProductDetail() {
                 ))}
               </div>
 
-              {/* Main Image */}
               <div className="flex-1 bg-white rounded-2xl overflow-hidden flex items-center justify-center min-h-[580px] relative shadow-sm">
                 {galleryImages[selectedImage] && (
                   <Image
@@ -195,20 +208,16 @@ export default function ProductDetail() {
 
             {/* RIGHT — Product Info */}
             <div className="flex-1 flex flex-col gap-4">
-              {/* Badge */}
               <span className="inline-block self-start bg-[#f5c842] text-[#5a3e00] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded">
                 {product.category}
               </span>
 
-              {/* Title */}
               <h1 className="text-4xl font-bold uppercase text-gray-900 leading-snug">
                 {product.name}
               </h1>
 
-              {/* Rating */}
               <StarRating rating={4.8} count={reviewCount} />
 
-              {/* Price */}
               <div className="flex items-baseline gap-3">
                 <span className="text-3xl font-bold text-gray-900">
                   ₹{product.sell_price}
@@ -227,20 +236,17 @@ export default function ProductDetail() {
                 )}
               </div>
 
-              {/* Stock Status */}
               {isOutOfStock && (
                 <p className="text-red-500 font-bold text-sm uppercase tracking-widest -mt-2">
                   Out of Stock
                 </p>
               )}
 
-              {/* Short Description */}
               <div
                 className="text-md text-gray-600 leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: product.short_description }}
               />
 
-              {/* Tags */}
               {product.tags && (
                 <div className="flex flex-wrap gap-2">
                   {product.tags.split(",").map((tag, i) => (
@@ -254,7 +260,6 @@ export default function ProductDetail() {
                 </div>
               )}
 
-              {/* Quantity */}
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">
                   Quantity
@@ -278,7 +283,6 @@ export default function ProductDetail() {
                 </div>
               </div>
 
-              {/* CTA Buttons */}
               <div className="flex items-center gap-3 mt-2">
                 <button
                   disabled={isOutOfStock}
@@ -318,9 +322,11 @@ export default function ProductDetail() {
 
       {/* Accordion Sections */}
       <div className="bg-[#ede8e0] flex items-center justify-center px-4 py-6">
-        <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-3">
+        <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-3">
+
+          {/* Overview + Description */}
           {sections.map(({ id, title, content, isHtml }) => {
-            const isOpen = openId === id;
+            const isOpen = openId.has(id); // ✅ .has() not ===
             return (
               <div
                 key={id}
@@ -341,7 +347,6 @@ export default function ProductDetail() {
                     +
                   </span>
                 </button>
-
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${
                     isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
@@ -362,20 +367,44 @@ export default function ProductDetail() {
             );
           })}
 
-          {/* FAQ Section from API */}
+       
+        </div>
+      </div>
+
+      <RelatedProductsFaq />
+         {/* FAQs from API */}
+         <div className="w-full max-w-[1600px] mx-auto px-4">
+            {/* Heading */}
+                    <div className="flex items-center gap-3 md:gap-4 mb-7 md:mb-10">
+                 
+                           <div>
+                             <h2 className="text-[#ff4d00] text-[60px] sm:text-[72px] md:text-6xl font-extrabold akira-regular uppercase leading-none">
+                             PRODUCT RELATED  FAQ
+                             </h2>
+                             <div className="h-[4px] w-[180px] sm:w-[240px] md:w-[600px] bg-[#ff4d00] mt-1"></div>
+                           </div>
+                 
+                           <Image
+                             src="/questionmark.png"
+                             alt="?"
+                             width={100}
+                             height={100}
+                             className="rotate-12 w-[60px] h-[60px] sm:w-[100px] sm:h-[80px] md:w-[100px] md:h-[100px] animate-float"
+                           />
+                         </div>
           {faqs.length > 0 &&
             faqs.map((faq) => {
-              const isOpen = openId === `faq-${faq.id}`;
+              const isOpen = openId.has(`faq-${faq.id}`); // ✅ .has() not ===
               return (
                 <div
                   key={faq.id}
-                  className="bg-[#e5dfd6] rounded-xl overflow-hidden shadow-sm"
+                  className="bg-[#e5dfd6] rounded-xl overflow-hidden shadow-sm my-4"
                 >
                   <button
                     onClick={() => toggle(`faq-${faq.id}`)}
-                    className="w-full flex items-center justify-between px-9 py-7 text-left"
+                    className="w-full flex items-center justify-between px-9 py-7 text-left "
                   >
-                    <span className="text-xl font-bold uppercase tracking-widest text-black">
+                    <span className="text-xl akira-regular font-bold uppercase tracking-widest text-black">
                       {faq.question}
                     </span>
                     <span
@@ -391,17 +420,14 @@ export default function ProductDetail() {
                       isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="px-6 pb-5 text-sm text-[#5a5248] leading-relaxed">
+                    <p className="px-6 pb-5 futura-regular text-sm text-[#5a5248] leading-relaxed">
                       {faq.answer}
                     </p>
                   </div>
                 </div>
               );
             })}
-        </div>
-      </div>
-
-      <RelatedProductsFaq />
+            </div>
     </>
   );
 }

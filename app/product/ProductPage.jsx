@@ -137,6 +137,55 @@ export default function ProductPage() {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [error, setError] = useState("");
 
+  // Fetch products — replace the existing useEffect for products
+useEffect(() => {
+  const fetchProducts = async () => {
+    setLoadingProducts(true);
+    setError("");
+    try {
+      let url;
+      let params;
+
+      if (search.trim()) {
+        // ✅ Search API — /search/{query}
+        url = `${API_BASE_URL}/search/${encodeURIComponent(search.trim())}`;
+      } else {
+        // ✅ Normal products API — /products?page=&category_id=
+        params = new URLSearchParams();
+        params.append("page", currentPage);
+        if (activeCategoryId) params.append("category_id", activeCategoryId);
+        url = `${API_BASE_URL}/products?${params.toString()}`;
+      }
+
+      const res = await fetch(url, {
+        headers: { Accept: "application/json" },
+      });
+      const data = await res.json();
+
+      if (data.status === 200) {
+        setProducts(data.data);
+        // Search API mein pagination nahi hoti
+        setPagination(search.trim() ? null : data.pagination);
+      } else {
+        setError("Failed to load products.");
+      }
+    } catch (err) {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+  fetchProducts();
+}, [activeCategoryId, currentPage, search]);
+
+// Debounce search — yeh same rahega, bas confirm karo yeh hai
+useEffect(() => {
+  const timeout = setTimeout(() => {
+    setCurrentPage(1);
+  }, 400);
+  return () => clearTimeout(timeout);
+}, [search]);
+
   // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
@@ -267,15 +316,15 @@ export default function ProductPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex gap-0 max-w-[1600px] mx-auto px-4 pb-16">
+      <div className="flex gap-0 max-w-[1800px] mx-auto px-6 pb-16">
         {/* Sidebar */}
-        <aside className="w-44 shrink-0 pr-4">
+        <aside className="w-64 shrink-0 pr-7">
           <div className="bg-[#ede8e0] rounded-t-md px-3 py-2 mb-2">
-            <span className="text-[20px] font-bold uppercase tracking-widest text-gray-700">
+            <span className="text-[20px] akira-regular font-bold uppercase tracking-widest text-gray-700">
               Products
             </span>
           </div>
-          <div className="space-y-6 text-md">
+          <div className="space-y-6 text-xl futura-regular">
             {filters.map((f, i) => (
               <FilterItem key={i} label={f.label} />
             ))}

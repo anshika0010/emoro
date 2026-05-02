@@ -152,7 +152,43 @@ export default function InsightsTrends() {
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
-    <>
+    <><section className="w-full bg-[#dcd6cf] py-3 px-6 md:px-16 rounded-2xl">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
+        
+        {/* Left Image */}
+     <div className="w-full md:w-1/2">
+  <div className="relative w-full h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
+    <Image
+      src="/blog1.png"
+      alt="Pet Care"
+      fill
+      sizes="(max-width: 768px) 100vw, 50vw"
+      className="object-cover"
+      priority
+    />
+  </div>
+</div>
+
+        {/* Right Content */}
+        <div className="w-full md:w-1/2 text-gray-700">
+          
+          <h2 className="text-2xl md:text-3xl font-bold uppercase underline underline-offset-4 mb-4">
+            INSIGHTS FOR BETTER <br /> PET CARE
+          </h2>
+
+          <p className="text-sm md:text-base leading-relaxed mb-6">
+            Hot weather can quickly lead to dehydration in dogs, especially
+            during outdoor activities. Discover practical and effective ways to
+            keep your dog cool, hydrated, and protected during high temperatures
+            and long summer days.
+          </p>
+
+          <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-md font-semibold transition">
+            READ MORE
+          </button>
+        </div>
+      </div>
+    </section>
       <section className="max-w-[1600px] mx-auto px-4 py-8 bg-[#f5f5f5] min-h-screen">
         {/* Section Label */}
         <p className="text-[#f07800] text-[10px] font-extrabold uppercase tracking-[0.2em] mb-2 flex items-center gap-1">

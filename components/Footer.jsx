@@ -28,7 +28,7 @@ export default function Footer() {
   return (
     <>
       <div className="w-full bg-[#f3ede7] py-8 flex justify-center px-4 md:px-6">
-        <div className="w-full max-w-[1400px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="w-full max-w-[1850px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {features.map((item, i) => (
             <div
               key={i}
